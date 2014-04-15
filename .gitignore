@@ -16,3 +16,6 @@ html/*
 uploaded/
 .idea/
 *.iml
+.gradle/
+build/
+out/

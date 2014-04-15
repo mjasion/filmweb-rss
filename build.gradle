@@ -1,0 +1,37 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+springVersion = '1.0.1.RELEASE'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web:' + springVersion
+    compile 'org.springframework.boot:spring-boot-starter-test:' + springVersion
+    compile 'org.springframework.boot:spring-boot-starter-actuator:' + springVersion
+    compile 'org.springframework.boot:spring-boot-starter-remote-shell:' + springVersion
+    compile 'org.codehaus.groovy:groovy-all:2.3.0-beta-2'
+    compile 'rome:rome:1.0'
+    compile 'rome:rome:1.0'
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile("org.spockframework:spock-core:0.7-groovy-2.0") {
+        exclude group: 'org.codehaus.groovy', module: 'groovy-all'
+    }
+    testRuntime("org.spockframework:spock-spring:0.7-groovy-2.0") {
+        exclude group: 'org.spockframework', module: 'spock-core'
+    }
+}
+
+sourceSets {
+    test {
+        groovy {
+            srcDirs = ['src/test/groovy']
+        }
+    }
+}
