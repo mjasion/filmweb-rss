@@ -11,7 +11,7 @@ class FilmwebServiceIntegrationSpec extends IntegrationSpec {
     @Value('${filmweb.url}')
     String filmwebUrl
 
-    def "shoul get filmweb page"() {
+    def "should get filmweb page"() {
         when:
         Document page = filmwebService.getPage('https://google.com/')
 
@@ -22,13 +22,13 @@ class FilmwebServiceIntegrationSpec extends IntegrationSpec {
 
     def "should get dvd premieres list"() {
         when:
-        DvdPremieresDto premieresList = filmwebService.getDvdPremiersList()
+        DvdPremieresDto premieres = filmwebService.getDvdPremiersDto()
 
         then:
-        premieresList.premieresList.size() > 0
-        premieresList.nextPageLink != null
-        premieresList.nextPageLink.startsWith(filmwebUrl)
-        premieresList.previousPageLink != null
-        premieresList.previousPageLink.startsWith(filmwebUrl)
+        premieres.premieres.size() > 0
+        premieres.nextPageLink != null
+        premieres.nextPageLink.startsWith(filmwebUrl)
+        premieres.previousPageLink != null
+        premieres.previousPageLink.startsWith(filmwebUrl)
     }
 }

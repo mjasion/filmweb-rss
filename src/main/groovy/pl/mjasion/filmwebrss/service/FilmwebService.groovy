@@ -10,18 +10,18 @@ import org.springframework.stereotype.Service
 class FilmwebService {
 
     @Value('${filmweb.url.dvd.premieres}')
-    String dvdPremieresUrl
+    private String dvdPremieresUrl
 
     @Value('${filmweb.url}')
-    String filmwebUrl
+    private String filmwebUrl
 
     @Value('${user.agent}')
     private String userAgent
 
-    DvdPremieresDto getDvdPremiersList() {
+    DvdPremieresDto getDvdPremiersDto() {
         Document page = getPage(dvdPremieresUrl)
         return new DvdPremieresDto(
-                premieresList : page.select('ul.editionList li'),
+                premieres: page.select('ul.editionList li'),
                 previousPageLink: "${filmwebUrl}${page.select('div.sortCont a.prev').attr('href')}",
                 nextPageLink: "${filmwebUrl}${page.select('div.sortCont a.next').attr('href')}",
         )

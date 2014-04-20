@@ -9,7 +9,7 @@ class DvdPremieresFactory {
 
     static DvdPremieresDto createDvdPremieres(Map = [:]) {
         return new DvdPremieresDto(
-                premieresList: Jsoup.parse(dvdPremieresPage.text).select('ul.editionList li')
+                premieres: Jsoup.parse(dvdPremieresPage.text).select('ul.editionList li')
         )
     }
 }
