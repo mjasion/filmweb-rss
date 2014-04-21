@@ -4,6 +4,7 @@ import org.jsoup.nodes.Document
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import pl.mjasion.filmwebrss.IntegrationSpec
+import pl.mjasion.filmwebrss.service.filmweb.FilmwebService
 
 class FilmwebServiceIntegrationSpec extends IntegrationSpec {
     @Autowired FilmwebService filmwebService
@@ -20,9 +21,9 @@ class FilmwebServiceIntegrationSpec extends IntegrationSpec {
         page.body() != null
     }
 
-    def "should get dvd premieres list"() {
+    def "should get premieres list"() {
         when:
-        DvdPremieresDto premieres = filmwebService.getDvdPremiersDto()
+        PremieresDto premieres = filmwebService.getPremiersDto()
 
         then:
         premieres.premieres.size() > 0

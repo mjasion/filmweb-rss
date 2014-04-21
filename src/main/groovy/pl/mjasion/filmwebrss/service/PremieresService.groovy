@@ -12,9 +12,10 @@ import pl.mjasion.filmwebrss.domain.Premiere
 import pl.mjasion.filmwebrss.domain.repository.GenreRepository
 import pl.mjasion.filmwebrss.domain.repository.MovieRepository
 import pl.mjasion.filmwebrss.domain.repository.PremiereRepository
+import pl.mjasion.filmwebrss.service.filmweb.FilmwebService
 
 @Service
-class DvdPremieresService {
+class PremieresService {
     @Autowired FilmwebService filmwebService
     @Autowired PremiereRepository premiereRepository
     @Autowired MovieRepository movieRepository
@@ -24,15 +25,17 @@ class DvdPremieresService {
     private String filmwebUrl
 
 
-    List<Premiere> saveCurrentDvdPremieres() {
-        DvdPremieresDto premieresDto = filmwebService.getDvdPremiersDto()
-        return saveDvdPremiereDtos(premieresDto)
+    List<Premiere> saveCurrentPremieres() {
+        PremieresDto premieresDto = filmwebService.getPremiersDto()
+        return savePremiereDtos(premieresDto)
     }
 
-    ArrayList<Premiere> saveDvdPremiereDtos(DvdPremieresDto premieresDto) {
+    void savePremiereDtos(PremieresDto premieresDto) {
         List premieres = convertPremieres(premieresDto.premieres)
+        premieres = premieres.findAll { Premiere premiere ->
+            premiereRepository.findByMovieAndStorageMedia(premiere.movie, premiere.storageMedia) == null
+        }
         premiereRepository.save(premieres)
-        return premieres.unique(false) { Premiere premiere -> premiere.movie.name }
     }
 
     List convertPremieres(List<Elements> premieres) {

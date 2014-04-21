@@ -20,5 +20,6 @@ uploaded/
 build/
 out/
 
+*.log
 gradlew
 gradlew.bat

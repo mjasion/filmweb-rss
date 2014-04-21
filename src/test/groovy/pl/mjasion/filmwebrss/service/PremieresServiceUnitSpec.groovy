@@ -7,18 +7,19 @@ import pl.mjasion.filmwebrss.domain.Movie
 import pl.mjasion.filmwebrss.domain.repository.GenreRepository
 import pl.mjasion.filmwebrss.domain.repository.MovieRepository
 import pl.mjasion.filmwebrss.domain.repository.PremiereRepository
+import pl.mjasion.filmwebrss.service.filmweb.FilmwebService
 import spock.lang.Specification
 
-import static pl.mjasion.filmwebrss.factory.DvdPremieresFactory.createDvdPremieres
+import static pl.mjasion.filmwebrss.factory.PremieresFactory.createPremieres
 
-class DvdPremieresServiceUnitSpec extends Specification {
+class PremieresServiceUnitSpec extends Specification {
     String filmwebUrl = 'http://filmweb.pl'
-    DvdPremieresDto premieres = createDvdPremieres()
+    PremieresDto premieres = createPremieres()
     FilmwebService filmwebService = Mock()
     PremiereRepository premiereRepository = Mock()
     GenreRepository genreRepository = Stub()
     MovieRepository movieRepository = Mock()
-    DvdPremieresService dvdPremieresService = new DvdPremieresService(
+    PremieresService premieresService = new PremieresService(
             filmwebUrl: filmwebUrl,
             filmwebService: filmwebService,
             premiereRepository: premiereRepository,
@@ -26,12 +27,12 @@ class DvdPremieresServiceUnitSpec extends Specification {
             movieRepository: movieRepository
     )
 
-    def "should save current dvd premieres"() {
+    def "should save current premieres"() {
         when:
-        dvdPremieresService.saveCurrentDvdPremieres()
+        premieresService.saveCurrentPremieres()
 
         then:
-        1 * filmwebService.getDvdPremiersDto() >> premieres
+        1 * filmwebService.getPremiersDto() >> premieres
         1 * premiereRepository.save(_ as List)
     }
 
@@ -42,7 +43,7 @@ class DvdPremieresServiceUnitSpec extends Specification {
         movieRepository.findByName(_) >> new Movie(name: firstPremiere.select('h3.premiereFilm a').text())
 
         when:
-        def convertedPremieres = dvdPremieresService.convertPremieres(premieres)
+        def convertedPremieres = premieresService.convertPremieres(premieres)
 
         then:
         convertedPremieres != null
@@ -61,7 +62,7 @@ class DvdPremieresServiceUnitSpec extends Specification {
                 .withMinuteOfHour(30).toDate()
 
         when:
-        def parsedDate = dvdPremieresService.parsePremiereShopdate('21/04/2014 12:30')
+        def parsedDate = premieresService.parsePremiereShopdate('21/04/2014 12:30')
 
         then:
         parsedDate == date

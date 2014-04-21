@@ -7,7 +7,7 @@ import pl.mjasion.filmwebrss.IntegrationSpec
 class FimwebRssApplicationIntegrationSpec extends IntegrationSpec {
     @Autowired FilmwebRssApplication application
 
-    def "should initialize spring project"() {
+    def "should initialize spring"() {
         expect:
         application != null
     }
