@@ -1,4 +1,4 @@
-package pl.mjasion.filmwebrss.quartz
+package pl.mjasion.filmwebrss.scheduler
 
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
