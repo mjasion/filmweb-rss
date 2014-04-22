@@ -5,8 +5,8 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.ModelAndView
-import pl.mjasion.filmwebrss.domain.Premiere
-import pl.mjasion.filmwebrss.domain.repository.PremiereRepository
+import pl.mjasion.filmwebrss.domain.BlueRayPremiere
+import pl.mjasion.filmwebrss.domain.repository.BluerayPremiereRepository
 import pl.mjasion.filmwebrss.feed.PremiereFeedContent
 
 import static org.springframework.data.domain.Sort.Direction.DESC
@@ -16,11 +16,11 @@ import static org.springframework.data.domain.Sort.Direction.DESC
 class RssFeedController {
 
     @Autowired
-    PremiereRepository premiereRepository
+    BluerayPremiereRepository premiereRepository
 
-    @RequestMapping('premieres')
+    @RequestMapping('blueray/premieres')
     ModelAndView dvdPremieres() {
-        List<Premiere> premieres = premiereRepository.findAll(new PageRequest(0, 20, DESC, 'premiereShopdate')).content
+        List<BlueRayPremiere> premieres = premiereRepository.findAll(new PageRequest(0, 20, DESC, 'premiereShopdate')).content
         List items = premieres.collect {
 
             return new PremiereFeedContent(

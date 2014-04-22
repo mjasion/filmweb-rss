@@ -4,22 +4,24 @@ import org.joda.time.DateTime
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 import pl.mjasion.filmwebrss.domain.Movie
+import pl.mjasion.filmwebrss.domain.repository.BluerayPremiereRepository
 import pl.mjasion.filmwebrss.domain.repository.GenreRepository
 import pl.mjasion.filmwebrss.domain.repository.MovieRepository
-import pl.mjasion.filmwebrss.domain.repository.PremiereRepository
+import pl.mjasion.filmwebrss.service.dto.BlurayPremieresDto
 import pl.mjasion.filmwebrss.service.filmweb.FilmwebService
 import spock.lang.Specification
 
 import static pl.mjasion.filmwebrss.factory.PremieresFactory.createPremieres
 
-class PremieresServiceUnitSpec extends Specification {
+class BluerayPremieresServiceUnitSpec extends Specification {
     String filmwebUrl = 'http://filmweb.pl'
-    PremieresDto premieres = createPremieres()
+    BlurayPremieresDto premieres = createPremieres()
     FilmwebService filmwebService = Mock()
-    PremiereRepository premiereRepository = Mock()
+    BluerayPremiereRepository premiereRepository = Mock()
     GenreRepository genreRepository = Stub()
     MovieRepository movieRepository = Mock()
-    PremieresService premieresService = new PremieresService(
+
+    BlurayPremieresService premieresService = new BlurayPremieresService(
             filmwebUrl: filmwebUrl,
             filmwebService: filmwebService,
             premiereRepository: premiereRepository,

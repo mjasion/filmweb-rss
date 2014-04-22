@@ -6,18 +6,19 @@ import org.jsoup.select.Elements
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
+import pl.mjasion.filmwebrss.domain.BlueRayPremiere
 import pl.mjasion.filmwebrss.domain.Genre
 import pl.mjasion.filmwebrss.domain.Movie
-import pl.mjasion.filmwebrss.domain.Premiere
+import pl.mjasion.filmwebrss.domain.repository.BluerayPremiereRepository
 import pl.mjasion.filmwebrss.domain.repository.GenreRepository
 import pl.mjasion.filmwebrss.domain.repository.MovieRepository
-import pl.mjasion.filmwebrss.domain.repository.PremiereRepository
+import pl.mjasion.filmwebrss.service.dto.BlurayPremieresDto
 import pl.mjasion.filmwebrss.service.filmweb.FilmwebService
 
 @Service
-class PremieresService {
+class BlurayPremieresService {
     @Autowired FilmwebService filmwebService
-    @Autowired PremiereRepository premiereRepository
+    @Autowired BluerayPremiereRepository premiereRepository
     @Autowired MovieRepository movieRepository
     @Autowired GenreRepository genreRepository
 
@@ -25,22 +26,24 @@ class PremieresService {
     private String filmwebUrl
 
 
-    List<Premiere> saveCurrentPremieres() {
-        PremieresDto premieresDto = filmwebService.getPremiersDto()
+    List<BlueRayPremiere> saveCurrentPremieres() {
+        BlurayPremieresDto premieresDto = filmwebService.getPremiersDto()
         return savePremiereDtos(premieresDto)
     }
 
-    void savePremiereDtos(PremieresDto premieresDto) {
+    void savePremiereDtos(BlurayPremieresDto premieresDto) {
         List premieres = convertPremieres(premieresDto.premieres)
-        premieres = premieres.findAll { Premiere premiere ->
-            premiereRepository.findByMovieAndStorageMedia(premiere.movie, premiere.storageMedia) == null
-        }
+        premieres = premieres.findAll { BlueRayPremiere premiere -> premiere.storageMedia == 'BluRay' }.
+                findAll { BlueRayPremiere premiere ->
+                    premiereRepository.findByMovieAndStorageMedia(premiere.movie, premiere.storageMedia) == null
+                }
         premiereRepository.save(premieres)
     }
 
-    List convertPremieres(List<Elements> premieres) {
+    @VisibleForTesting
+    private List convertPremieres(List<Elements> premieres) {
         return premieres.collect { Element element ->
-            return new Premiere(
+            return new BlueRayPremiere(
                     movie: getMovie(element),
                     premiereShopdate: parsePremiereShopdate(element.select('span.premiereShopdate').attr('title')),
                     storageMedia: element.select('span.storageMedia').text(),

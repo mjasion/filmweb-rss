@@ -1,8 +1,8 @@
-package pl.mjasion.filmwebrss.service
+package pl.mjasion.filmwebrss.service.dto
 
 import org.jsoup.select.Elements
 
-class PremieresDto {
+class BlurayPremieresDto {
     List<Elements> premieres
     String nextPageLink
     String previousPageLink

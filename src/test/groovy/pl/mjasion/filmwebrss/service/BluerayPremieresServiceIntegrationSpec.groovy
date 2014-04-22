@@ -2,38 +2,35 @@ package pl.mjasion.filmwebrss.service
 
 import org.springframework.beans.factory.annotation.Autowired
 import pl.mjasion.filmwebrss.IntegrationSpec
-import pl.mjasion.filmwebrss.domain.Genre
-import pl.mjasion.filmwebrss.domain.Premiere
+import pl.mjasion.filmwebrss.domain.BlueRayPremiere
+import pl.mjasion.filmwebrss.domain.repository.BluerayPremiereRepository
 import pl.mjasion.filmwebrss.domain.repository.GenreRepository
-import pl.mjasion.filmwebrss.domain.repository.PremiereRepository
 
-class PremieresServiceIntegrationSpec extends IntegrationSpec {
-    @Autowired PremieresService premieresService
-    @Autowired PremiereRepository premiereRepository
+class BluerayPremieresServiceIntegrationSpec extends IntegrationSpec {
+    @Autowired BlurayPremieresService premieresService
+    @Autowired BluerayPremiereRepository premiereRepository
     @Autowired GenreRepository genreRepository
 
     def setup() {
         premiereRepository.deleteAll()
     }
 
-    def "should save current premieres"() {
+    def "should save current blueray premieres"() {
         given:
-        int expectedPremieresCount = 15
+        int expectedPremieresCount = 2
         genreRepository.deleteAll()
 
         when:
         premieresService.saveCurrentPremieres()
 
         then:
-        List<Premiere> premieres = premiereRepository.findAll()
+        List<BlueRayPremiere> premieres = premiereRepository.findAll()
         premieres.size() == expectedPremieresCount
-        List<Genre> genres = premieres*.genres.flatten().unique(false) { Genre genre -> genre.name }
-        genreRepository.count() == genres.size()
     }
 
     def "should not duplicate premieres"() {
         given:
-        int expectedPremieresCount = 15
+        int expectedPremieresCount = 2
         premieresService.saveCurrentPremieres()
 
         when:

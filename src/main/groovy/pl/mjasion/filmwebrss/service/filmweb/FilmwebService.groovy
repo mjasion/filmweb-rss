@@ -5,13 +5,13 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
-import pl.mjasion.filmwebrss.service.PremieresDto
+import pl.mjasion.filmwebrss.service.dto.BlurayPremieresDto
 
 @Service
 class FilmwebService {
 
-    @Value('${filmweb.url.premieres}')
-    private String premieresUrl
+    @Value('${filmweb.url.premieres.bluray}')
+    private String blurayPremieresUrl
 
     @Value('${filmweb.url}')
     private String filmwebUrl
@@ -19,9 +19,9 @@ class FilmwebService {
     @Value('${user.agent}')
     private String userAgent
 
-    PremieresDto getPremiersDto() {
-        Document page = getPage(premieresUrl)
-        return new PremieresDto(
+    BlurayPremieresDto getPremiersDto() {
+        Document page = getPage(blurayPremieresUrl)
+        return new BlurayPremieresDto(
                 premieres: page.select('ul.editionList li'),
                 previousPageLink: "${filmwebUrl}${page.select('div.sortCont a.prev').attr('href')}",
                 nextPageLink: "${filmwebUrl}${page.select('div.sortCont a.next').attr('href')}",

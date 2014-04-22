@@ -14,9 +14,9 @@ class RssFeedViewer extends AbstractRssFeedView {
 
     @Override
     protected void buildFeedMetadata(Map<String, Object> model, Channel feed, HttpServletRequest request) {
-        feed.title = 'Premiery DVD/Blu-ray - MJASION.PL'
+        feed.title = 'Premiery DVD/Blu-ray - mjasion.pl'
         feed.link = 'http://filmweb-rss.mjasion.pl'
-        feed.description = 'Premiery DVD/Blu-ray - MJASION.PL'
+        feed.description = 'Premiery DVD/Blu-ray - mjasion.pl'
         super.buildFeedMetadata(model, feed, request)
     }
 
