@@ -11,7 +11,7 @@ import pl.mjasion.filmwebrss.domain.repository.MovieRepository
 @RequestMapping('/statistics')
 class StatisticController {
 
-    @Autowired BluerayPremiereRepository premiereRepository
+    @Autowired BluerayPremiereRepository bluerayPremiereRepository
     @Autowired GenreRepository genreRepository
     @Autowired MovieRepository movieRepository
 
@@ -20,7 +20,7 @@ class StatisticController {
         return [
                 genres   : genreRepository.count(),
                 movies   : movieRepository.count(),
-                premieres: premiereRepository.count(),
+                premieres: bluerayPremiereRepository.count(),
         ]
     }
 }

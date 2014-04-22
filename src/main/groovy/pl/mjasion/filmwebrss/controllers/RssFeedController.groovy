@@ -24,7 +24,7 @@ class RssFeedController {
         List items = premieres.collect {
 
             return new PremiereFeedContent(
-                    title: "${it.storageMedia} - $it.movie.name",
+                    title: $it.movie.name,
                     url: it.movie.filmwebLink,
                     premiereShopdate: it.premiereShopdate,
                     summary: it.genres*.name.join(', ')
