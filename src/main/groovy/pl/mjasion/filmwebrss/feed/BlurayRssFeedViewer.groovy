@@ -3,6 +3,7 @@ package pl.mjasion.filmwebrss.feed
 import com.sun.syndication.feed.rss.Channel
 import com.sun.syndication.feed.rss.Content
 import com.sun.syndication.feed.rss.Item
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.view.feed.AbstractRssFeedView
 
@@ -10,13 +11,16 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class RssFeedViewer extends AbstractRssFeedView {
+class BlurayRssFeedViewer extends AbstractRssFeedView {
+
+    @Value('${filmweb.url.premieres.bluray}')
+    private String blurayPremieresUrl
 
     @Override
     protected void buildFeedMetadata(Map<String, Object> model, Channel feed, HttpServletRequest request) {
-        feed.title = 'Premiery DVD/Blu-ray - mjasion.pl'
-        feed.link = 'http://filmweb-rss.mjasion.pl'
-        feed.description = 'Premiery DVD/Blu-ray - mjasion.pl'
+        feed.title = 'Premiery Blu-ray - mjasion.pl'
+        feed.link = blurayPremieresUrl
+        feed.description = 'Premiery Blu-ray - mjasion.pl'
         super.buildFeedMetadata(model, feed, request)
     }
 
