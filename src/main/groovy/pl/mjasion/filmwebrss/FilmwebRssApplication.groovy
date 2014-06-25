@@ -15,6 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling
 @EnableScheduling
 @ComponentScan
 class FilmwebRssApplication {
+
     public static void main(String[] args) throws Exception {
         SpringApplication.run(FilmwebRssApplication.class, args);
     }
