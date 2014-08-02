@@ -17,7 +17,6 @@ class BluerayPremieresServiceIntegrationSpec extends IntegrationSpec {
 
     def "should save current blueray premieres"() {
         given:
-        int expectedPremieresCount = 2
         genreRepository.deleteAll()
 
         when:
@@ -25,18 +24,17 @@ class BluerayPremieresServiceIntegrationSpec extends IntegrationSpec {
 
         then:
         List<BlueRayPremiere> premieres = premiereRepository.findAll()
-        premieres.size() == expectedPremieresCount
+        premieres.size() == 2
     }
 
     def "should not duplicate premieres"() {
         given:
-        int expectedPremieresCount = 2
         premieresService.saveCurrentPremieres()
 
         when:
         premieresService.saveCurrentPremieres()
 
         then:
-        premiereRepository.count() == expectedPremieresCount
+        premiereRepository.count() == 2
     }
 }
