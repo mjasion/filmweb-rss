@@ -53,3 +53,5 @@ dependencies {
 jar {
     archiveName = "movies-rss.jar"
 }
+
+task stage(dependsOn: ['build'])

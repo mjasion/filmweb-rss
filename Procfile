@@ -1,0 +1,1 @@
+web:	java -jar $JAVA_OPTS build/libs/movies-rss.jar -ea --server.port=$PORT --spring.data.mongodb.uri=$MONGO_URI
