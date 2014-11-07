@@ -16,7 +16,7 @@ apply plugin: 'spring-boot'
 
 sourceCompatibility = 1.7
 group = 'pl.mjasion'
-archivesBaseName = 'filmweb-rss'
+archivesBaseName = 'movies-rss'
 version = '1.0'
 
 repositories {
@@ -51,5 +51,5 @@ dependencies {
 }
 
 jar {
-    archiveName = "filmweb-rss.jar"
+    archiveName = "movies-rss.jar"
 }
