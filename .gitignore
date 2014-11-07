@@ -16,11 +16,9 @@ html/*
 uploaded/
 .idea/
 *.iml
-.gradle/
 build/
 out/
 
 *.log
-gradlew
-gradlew.bat
-gradle-wrapper.properties
+
+!gradle/wrapper/gradle-wrapper.jar
