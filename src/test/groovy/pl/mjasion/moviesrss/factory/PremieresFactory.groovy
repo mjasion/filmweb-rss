@@ -9,7 +9,7 @@ class PremieresFactory {
 
     static BlurayPremieresDto createPremieres(Map = [:]) {
         return new BlurayPremieresDto(
-                premieres: Jsoup.parse(premieresPage.text).select('ul.editionList li')
+                premieres: Jsoup.parse(premieresPage.text).select('ul.editionList li').contents
         )
     }
 }

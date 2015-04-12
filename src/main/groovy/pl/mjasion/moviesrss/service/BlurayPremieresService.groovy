@@ -68,7 +68,7 @@ class BlurayPremieresService {
 
     @VisibleForTesting
     private Date parsePremiereShopdate(String premiereShopDate) {
-        return new Date().parse('dd/MM/yyyy HH:mm', premiereShopDate)
+        return new Date().parse('dd/MM/yyyy', premiereShopDate)
     }
 
     // TODO create converter http://www.javacodegeeks.com/2013/11/spring-data-mongodb-cascade-save-on-dbref-objects.html

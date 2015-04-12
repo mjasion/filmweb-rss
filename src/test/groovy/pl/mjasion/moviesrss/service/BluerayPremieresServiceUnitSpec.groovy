@@ -60,11 +60,10 @@ class BluerayPremieresServiceUnitSpec extends Specification {
                 .withYear(2014)
                 .withMonthOfYear(4)
                 .withDayOfMonth(21)
-                .withHourOfDay(12)
-                .withMinuteOfHour(30).toDate()
+                .withMillisOfDay(0).toDate()
 
         when:
-        def parsedDate = premieresService.parsePremiereShopdate('21/04/2014 12:30')
+        def parsedDate = premieresService.parsePremiereShopdate('21/04/2014')
 
         then:
         parsedDate == date

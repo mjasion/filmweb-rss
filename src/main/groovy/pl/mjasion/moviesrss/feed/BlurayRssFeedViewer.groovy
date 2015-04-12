@@ -1,8 +1,8 @@
 package pl.mjasion.moviesrss.feed
 
-import com.sun.syndication.feed.rss.Channel
-import com.sun.syndication.feed.rss.Content
-import com.sun.syndication.feed.rss.Item
+import com.rometools.rome.feed.rss.Channel
+import com.rometools.rome.feed.rss.Content
+import com.rometools.rome.feed.rss.Item
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.view.feed.AbstractRssFeedView
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.feed.AbstractRssFeedView
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@Component
+@Component('blurayRssFeedViewer')
 class BlurayRssFeedViewer extends AbstractRssFeedView {
 
     @Value('${filmweb.url.premieres.bluray}')

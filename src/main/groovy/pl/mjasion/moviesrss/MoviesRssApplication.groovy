@@ -17,7 +17,7 @@ import org.springframework.scheduling.annotation.EnableScheduling
 class MoviesRssApplication {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(MoviesRssApplication.class, args);
+        SpringApplication.run(MoviesRssApplication.class, args)
     }
 
 }

@@ -31,7 +31,8 @@ class RssFeedController {
             )
         }
 
-        ModelAndView modelAndView = new ModelAndView('rssFeedViewer');
+        ModelAndView modelAndView = new ModelAndView()
+        modelAndView.setViewName('blurayRssFeedViewer')
         modelAndView.addObject('premieres', items)
         return modelAndView
     }

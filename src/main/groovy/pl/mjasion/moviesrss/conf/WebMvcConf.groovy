@@ -16,6 +16,6 @@ class WebMvcConf extends WebMvcConfigurerAdapter {
     @Bean
     @ConditionalOnBean(View.class)
     public BeanNameViewResolver beanNameViewResolver() {
-        return new BeanNameViewResolver();
+        return new BeanNameViewResolver()
     }
 }

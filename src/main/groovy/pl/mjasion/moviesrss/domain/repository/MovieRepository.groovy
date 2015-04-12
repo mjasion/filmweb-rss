@@ -5,6 +5,6 @@ import pl.mjasion.moviesrss.domain.Movie
 
 interface MovieRepository extends CrudRepository<Movie, String> {
 
-    Movie findByName(String name);
+    Movie findByName(String name)
 
 }

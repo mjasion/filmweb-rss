@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.8.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
     }
 }
 
@@ -14,26 +14,26 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 group = 'pl.mjasion'
 archivesBaseName = 'movies-rss'
 version = '1.0'
 
 repositories {
     mavenLocal()
+    jcenter()
     mavenCentral()
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.3.3'
+    compile 'org.codehaus.groovy:groovy-all:2.4.3'
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-actuator'
-    compile 'org.springframework.boot:spring-boot-starter-remote-shell'
     compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.springframework:spring-test'
-    testCompile 'junit:junit:4.11'
+    testCompile 'junit:junit:4.12'
     testCompile("org.spockframework:spock-core:0.7-groovy-2.0") {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
     }
@@ -44,10 +44,10 @@ dependencies {
     testRuntime "org.objenesis:objenesis:1.2"
 
     compile 'net.sourceforge.nekohtml:nekohtml:1.9.20'
-    compile 'org.jsoup:jsoup:1.7.3'
-    compile 'rome:rome:1.0'
-    compile 'com.google.guava:guava:17.0'
-    compile 'joda-time:joda-time:2.3'
+    compile 'org.jsoup:jsoup:1.8.1'
+    compile 'com.rometools:rome:1.5.0'
+    compile 'com.google.guava:guava:18.0'
+    compile 'joda-time:joda-time:2.7'
 }
 
 jar {
