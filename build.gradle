@@ -54,4 +54,4 @@ jar {
     archiveName = "movies-rss.jar"
 }
 
-task stage(dependsOn: ['build'])
+task stage(dependsOn: ['bootRepackage'])
