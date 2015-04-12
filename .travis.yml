@@ -7,3 +7,11 @@ notifications:
   email:
     on_success: always
     on_failure: always
+
+deploy:
+  provider: heroku
+  app: movies-rss
+  jdk: oraclejdk8
+  strategy: git
+  api_key:
+    secure: gUMZzIClyWpvkaqnSDJE+9CmIOq2d0G/NFgPqR06/2T0yo+41XXBrJkdF3f47RpW2U+89bYj5vRotXPIN4D/Au6lNcKP3wdr5fWTdHaErmWfnnLsiy/pcvVroFQXXXQItHJme18WSmqYDjz4pFWjj1VrkGsD6rZJ62zDE/lruoA=
