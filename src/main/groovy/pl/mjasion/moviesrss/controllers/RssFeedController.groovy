@@ -20,7 +20,7 @@ class RssFeedController {
 
     @RequestMapping('blueray/premieres')
     ModelAndView dvdPremieres() {
-        List<BlueRayPremiere> premieres = premiereRepository.findAll(new PageRequest(0, 20, DESC, 'premiereShopdate')).content
+        List<BlueRayPremiere> premieres = premiereRepository.findAll(new PageRequest(0, 50, DESC, 'premiereShopdate')).content
         List items = premieres.collect {
 
             return new PremiereFeedContent(
