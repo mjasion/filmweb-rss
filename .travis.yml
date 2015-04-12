@@ -1,22 +1,9 @@
 language: groovy
 
 jdk:
-  - openjdk7
-  - oraclejdk7
   - oraclejdk8
-
-services:
-  - mongodb
 
 notifications:
   email:
     on_success: always
     on_failure: always
-
-#deploy:
-#  provider: heroku
-#  app: movies-rss
-#  jdk: oraclejdk8
-#  strategy: git
-#  api_key:
-#    secure: mUatdwo/qoOuYWeadnwFEW1UZjc1tVmbQCecEnrWigZ2jZhCDUCtijuf5fkYCh135DMvnyu7BQadcnws113aql1ggbWP453xCINDBiELiBgJFh3sphmGNMlevB5NtZGtVg+ZR3KrtIjbZb7u/WDvNivlhtVwnS+EipWbh24DSWo=
