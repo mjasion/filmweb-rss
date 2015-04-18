@@ -5,20 +5,15 @@ import pl.mjasion.moviesrss.IntegrationSpec
 import pl.mjasion.moviesrss.domain.BlueRayPremiere
 import pl.mjasion.moviesrss.domain.repository.BluerayPremiereRepository
 import pl.mjasion.moviesrss.domain.repository.GenreRepository
+import pl.mjasion.moviesrss.domain.repository.MovieRepository
 
 class BluerayPremieresServiceIntegrationSpec extends IntegrationSpec {
     @Autowired BlurayPremieresService premieresService
     @Autowired BluerayPremiereRepository premiereRepository
     @Autowired GenreRepository genreRepository
-
-    def setup() {
-        premiereRepository.deleteAll()
-    }
+    @Autowired MovieRepository movieRepository
 
     def "should save current blueray premieres"() {
-        given:
-        genreRepository.deleteAll()
-
         when:
         premieresService.saveCurrentPremieres()
 
@@ -36,5 +31,11 @@ class BluerayPremieresServiceIntegrationSpec extends IntegrationSpec {
 
         then:
         premiereRepository.count() == 2
+    }
+
+    def cleanup() {
+        premiereRepository.deleteAll()
+        genreRepository.deleteAll()
+        movieRepository.deleteAll()
     }
 }
