@@ -11,11 +11,11 @@ import pl.mjasion.moviesrss.service.dto.BlurayPremieresDto
 import pl.mjasion.moviesrss.service.filmweb.FilmwebService
 import spock.lang.Specification
 
-import static pl.mjasion.moviesrss.factory.PremieresFactory.createPremieres
+import static pl.mjasion.moviesrss.factory.PremieresFactory.createBlueRayPremieres
 
 class BluerayPremieresServiceUnitSpec extends Specification {
     String filmwebUrl = 'http://filmweb.pl'
-    BlurayPremieresDto premieres = createPremieres()
+    BlurayPremieresDto premieres = createBlueRayPremieres()
     FilmwebService filmwebService = Mock()
     BluerayPremiereRepository premiereRepository = Mock()
     GenreRepository genreRepository = Stub()
