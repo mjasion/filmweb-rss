@@ -3,6 +3,7 @@ package pl.mjasion.moviesrss.feed
 import com.rometools.rome.feed.rss.Channel
 import com.rometools.rome.feed.rss.Content
 import com.rometools.rome.feed.rss.Item
+import groovy.transform.CompileStatic
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.view.feed.AbstractRssFeedView
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component('blurayRssFeedViewer')
+@CompileStatic
 class BlurayRssFeedViewer extends AbstractRssFeedView {
 
     @Value('${filmweb.url.premieres.bluray}')
@@ -26,7 +28,7 @@ class BlurayRssFeedViewer extends AbstractRssFeedView {
 
     @Override
     protected List<Item> buildFeedItems(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<PremiereFeedContent> premieres = model.get("premieres")
+        List<PremiereFeedContent> premieres = model.get("premieres") as List<PremiereFeedContent>
         List<Item> items = premieres.collect { PremiereFeedContent premiere ->
             new Item(
                     title: premiere.title,

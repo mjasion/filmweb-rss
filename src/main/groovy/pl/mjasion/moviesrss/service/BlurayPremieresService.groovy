@@ -1,6 +1,7 @@
 package pl.mjasion.moviesrss.service
 
 import com.google.common.annotations.VisibleForTesting
+import groovy.transform.CompileStatic
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,6 +17,7 @@ import pl.mjasion.moviesrss.service.dto.BlurayPremieresDto
 import pl.mjasion.moviesrss.service.filmweb.FilmwebService
 
 @Service
+@CompileStatic
 class BlurayPremieresService {
     @Autowired FilmwebService filmwebService
     @Autowired BluerayPremiereRepository premiereRepository
@@ -25,23 +27,21 @@ class BlurayPremieresService {
     @Value('${filmweb.url}')
     private String filmwebUrl
 
-
-    List<BlueRayPremiere> saveCurrentPremieres() {
+    void saveCurrentPremieres() {
         BlurayPremieresDto premieresDto = filmwebService.getPremiersDto()
-        return savePremiereDtos(premieresDto)
+        savePremiereDtos(premieresDto)
     }
 
-    void savePremiereDtos(BlurayPremieresDto premieresDto) {
+    private void savePremiereDtos(BlurayPremieresDto premieresDto) {
         List premieres = convertPremieres(premieresDto.premieres)
-        premieres = premieres.findAll { BlueRayPremiere premiere -> premiere.storageMedia == 'BluRay' }.
-                findAll { BlueRayPremiere premiere ->
-                    premiereRepository.findByMovieAndStorageMedia(premiere.movie, premiere.storageMedia) == null
-                }
-        premiereRepository.save(premieres)
+        List blueRayPremieres = premieres.findAll { BlueRayPremiere premiere -> premiere.storageMedia == 'BluRay' }
+        List nonExistingBlueRayPremieres = blueRayPremieres.findAll { BlueRayPremiere premiere ->
+            premiereRepository.findByMovieAndStorageMedia(premiere.movie, premiere.storageMedia) == null
+        }
+        premiereRepository.save(nonExistingBlueRayPremieres)
     }
 
-    @VisibleForTesting
-    private List convertPremieres(List<Elements> premieres) {
+    private List<BlueRayPremiere> convertPremieres(List<Element> premieres) {
         return premieres.collect { Element element ->
             return new BlueRayPremiere(
                     movie: getMovie(element),

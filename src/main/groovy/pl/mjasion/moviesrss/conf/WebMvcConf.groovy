@@ -9,10 +9,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.BeanNameViewResolver
 
-@CompileStatic
 @Configuration
 @EnableWebMvc
+@CompileStatic
 class WebMvcConf extends WebMvcConfigurerAdapter {
+
     @Bean
     @ConditionalOnBean(View.class)
     public BeanNameViewResolver beanNameViewResolver() {

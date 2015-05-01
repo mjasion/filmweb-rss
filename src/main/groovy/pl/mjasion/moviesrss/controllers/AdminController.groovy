@@ -1,5 +1,6 @@
 package pl.mjasion.moviesrss.controllers
 
+import groovy.transform.CompileStatic
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -9,8 +10,9 @@ import pl.mjasion.moviesrss.domain.repository.MovieRepository
 import pl.mjasion.moviesrss.scheduler.PremieresDownloaderJob
 
 @RestController
-@RequestMapping('/admin/')
-class StatisticController {
+@CompileStatic
+@RequestMapping('/admin')
+class AdminController {
 
     @Autowired BluerayPremiereRepository bluerayPremiereRepository
     @Autowired GenreRepository genreRepository

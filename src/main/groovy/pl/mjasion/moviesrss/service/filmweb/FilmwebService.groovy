@@ -1,6 +1,7 @@
 package pl.mjasion.moviesrss.service.filmweb
 
 import com.google.common.annotations.VisibleForTesting
+import groovy.transform.CompileStatic
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.springframework.beans.factory.annotation.Value
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service
 import pl.mjasion.moviesrss.service.dto.BlurayPremieresDto
 
 @Service
+@CompileStatic
 class FilmwebService {
 
     @Value('${filmweb.url.premieres.bluray}')
